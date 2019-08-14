@@ -2,11 +2,13 @@
   "todos": [
     {
       "id": 1,
-      "title": "This is my first to do."
+      "title": "This is my first to do.",
+      "done": false
     },
     {
       "id": 2,
-      "title": "Secondddd"
+      "title": "Secondddd",
+      "done": false
     }
   ]
 }
