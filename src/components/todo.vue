@@ -1,8 +1,9 @@
 <template>
   <div class="todo">
-    <h2 :class="{'done': todo.done}">{{todo.title}}</h2>
+    <h2 :contenteditable="edit" :class="{'done': todo.done}">{{todo.title}}</h2>
     <button @click="$emit('deleted-todo', todo.id)" >Delete</button>
-    <button @click="toggleDone(todo)">DONE</button>
+    <button @click="toggleDone(todo)">Done</button>
+    <button @click="toggleEdit(todo)">Edit</button>
   </div>
 </template>
 
@@ -13,6 +14,11 @@ const baseURL = 'http://localhost:3000/todos/'
 
 export default {
   name: 'todo',
+  data(){
+    return {
+      edit: false
+    }
+  },
   props: {
     todo: {
       title: String,
@@ -26,6 +32,14 @@ export default {
         console.log(res);
         todo.done = !todo.done;
       }).catch(err => console.log(err))
+    },
+    toggleEdit(todo){
+      this.edit = !this.edit;
+      if(!this.edit){
+        axios.patch(baseURL+todo.id, {title: todo.title})
+          .then(res => console.log(res))
+          .catch(err => console.log(err));
+      }
     }
   }
 }
