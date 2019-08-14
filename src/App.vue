@@ -7,7 +7,7 @@
     </div>
 
     <div class="todos-container">
-      <Todo v-bind:todo="todo" v-bind:key="`t-${i}`" v-for="(todo, i) in todos"/>
+      <Todo @deleted-todo="delTodo($event)" v-bind:todo="todo" v-bind:key="`t-${i}`" v-for="(todo, i) in todos"/>
     </div>
   </div>
 </template>
@@ -16,7 +16,8 @@
 import Todo from './components/todo.vue'
 import axios from 'axios'
 
-const baseURL = 'http://localhost:3000/todos'
+
+const baseURL = 'http://localhost:3000/todos/'
 
 export default {
   name: 'app',
@@ -48,7 +49,8 @@ export default {
     },
     delTodo(id) {
       let todo = this.todos.find(t => t.id == id);
-      axios.delete(todo)
+      console.log(todo);
+      axios.delete(baseURL+id)
       .then(res => {
         console.log(res)
         this.getTodos();
