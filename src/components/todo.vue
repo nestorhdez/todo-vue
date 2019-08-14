@@ -1,6 +1,6 @@
 <template>
   <div class="todo">
-    <h2 :contenteditable="edit" :class="{'done': todo.done}">{{todo.title}}</h2>
+    <h2 :contenteditable="edit" :class="{'done': todo.done, 'edit': edit}">{{todo.title}}</h2>
     <button @click="$emit('deleted-todo', todo.id)" >Delete</button>
     <button @click="toggleDone(todo)">Done</button>
     <button @click="toggleEdit(todo)">Edit</button>
@@ -56,5 +56,8 @@ export default {
   }
   .done{
     text-decoration-line: line-through;
+  }
+  .edit{
+    border: 1px solid #2c3e50;
   }
 </style>
