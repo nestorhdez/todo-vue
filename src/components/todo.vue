@@ -35,10 +35,13 @@ export default {
       }).catch(err => console.log(err))
     },
     toggleEdit(todo){
-      this.edit = !this.edit;
       if(!this.edit){
+        this.edit = !this.edit;
+      } else if(this.edit){
         axios.patch(baseURL+todo._id, {text: todo.text})
-          .then(res => console.log(res))
+          .then(res => {
+             this.edit = !this.edit;
+          })
           .catch(err => console.log(err));
       }
     }
