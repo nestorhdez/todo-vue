@@ -1,6 +1,7 @@
 <template>
   <div class="todo">
-    <h2 :contenteditable="edit" :class="{'done': todo.done, 'edit': edit}">{{todo.title}}</h2>
+    <input type="text" v-if="edit" v-model="todo.title">
+    <h2 v-else :class="{'done': todo.done}">{{todo.title}}</h2>
     <button @click="$emit('deleted-todo', todo.id)" >Delete</button>
     <button @click="toggleDone(todo)">Done</button>
     <button @click="toggleEdit(todo)">Edit</button>
@@ -59,5 +60,11 @@ export default {
   }
   .edit{
     border: 1px solid #2c3e50;
+  }
+  input{
+    display: block;
+    width: 90%;
+    height: 40px;
+    margin: 5px auto;
   }
 </style>
