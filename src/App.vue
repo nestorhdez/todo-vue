@@ -26,7 +26,7 @@ export default {
   },
   data(){
     return {
-      newTodo: {text : ''},
+      newTodo: {text : '', isCompleted: false},
       todos: []
     }
   },
@@ -40,7 +40,7 @@ export default {
         .catch(err => console.log(err))
     },
     postTodo() {
-      axios.post(baseURL, {text : this.newTodo.text})
+      axios.post(baseURL, this.newTodo)
         .then(res => {
           console.log(res.data);
           this.getTodos();
