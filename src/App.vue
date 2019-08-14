@@ -17,7 +17,7 @@ import Todo from './components/todo.vue'
 import axios from 'axios'
 
 
-const baseURL = 'http://localhost:3000/todos/'
+const baseURL = 'http://localhost:2222/api/todos/'
 
 export default {
   name: 'app',
@@ -40,7 +40,7 @@ export default {
         .catch(err => console.log(err))
     },
     postTodo() {
-      axios.post(baseURL, {title : this.newTodo.text})
+      axios.post(baseURL, {text : this.newTodo.text})
         .then(res => {
           console.log(res.data);
           this.getTodos();
@@ -48,7 +48,7 @@ export default {
         .catch(err => console.log(err))
     },
     delTodo(id) {
-      let todo = this.todos.find(t => t.id == id);
+      let todo = this.todos.find(t => t._id == id);
       console.log(todo);
       axios.delete(baseURL+id)
       .then(res => {
